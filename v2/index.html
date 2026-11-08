@@ -41,27 +41,43 @@ ol{font-size:14px;line-height:1.6;padding-left:20px}.error{color:#8c2929;font-si
 <script>
 'use strict';
 var EXEC_URL='https://script.google.com/macros/s/AKfycbyzQbbruP7TIzLUg2BgLcu6B3dG_kGhIv4ghFEiF-ZUWwel-AcWZQAegvR54ftARXhc/exec';
+/* Funnel counters: anonymous event counts only, no personal data. Best-effort; never blocks the form. */
+var UA=navigator.userAgent||'',UAC=/Instagram/i.test(UA)?'ig':(/FBAN|FBAV|FB_IAB|FBIOS|FB4A/i.test(UA)?'fb':'other');
+var NO_TRACK=/[?&]notrack/.test(location.search);
+function track(k,byUa){if(NO_TRACK)return;try{var hit=function(key){var u='https://abacus.jasoncameron.dev/hit/sigc-freehour/'+key;
+  if(window.fetch)fetch(u,{mode:'no-cors',keepalive:true,cache:'no-store'}).catch(function(){});else(new Image()).src=u;};
+  hit(k);if(byUa)hit(k+'_'+UAC);}catch(e){}}
+var jsErrs=0;window.onerror=function(){if(jsErrs++<3)track('jserror',true);};
+track('load',true);
 var form=document.getElementById('claimForm'),submit=document.getElementById('submit'),error=document.getElementById('error');
-var LABEL='Get My Free Hour';
+var LABEL='Get My Free Hour',focused=false;
+form.addEventListener('focusin',function(){if(!focused){focused=true;track('focus',true);}});
 function failure(msg){submit.disabled=false;submit.textContent=LABEL;error.textContent=msg||'Something went wrong. Please try again or call (682) 477-5630.';error.hidden=false;}
 function show(id){document.getElementById('signup').hidden=true;var s=document.getElementById(id);s.hidden=false;window.scrollTo(0,0);try{s.focus()}catch(e){}}
 function result(d){
-  if(!d||(!d.code&&!d.notOpen&&!d.soldOut))return failure();
-  if(d.code){document.getElementById('thanksTitle').textContent=d.existing?'You already have a code:':'Your free hour awaits.';document.getElementById('code').textContent=d.code;show('thanks');}
-  else{document.getElementById('noticeTitle').textContent=d.notOpen?'Check back soon.':'All available hours have been claimed.';
+  if(!d||(!d.code&&!d.notOpen&&!d.soldOut)){track('err_badresponse');return failure();}
+  if(d.code){track(d.existing?'ok_existing':'ok',true);document.getElementById('thanksTitle').textContent=d.existing?'You already have a code:':'Your free hour awaits.';document.getElementById('code').textContent=d.code;show('thanks');}
+  else{track(d.notOpen?'notopen':'soldout');document.getElementById('noticeTitle').textContent=d.notOpen?'Check back soon.':'All available hours have been claimed.';
     document.getElementById('noticeText').textContent=d.notOpen?"The free hour isn't open yet. Check back soon or call (682) 477-5630.":'Thanks for your interest! Please call us and we will help you with the next available opportunity.';show('notice');}
 }
-function val(id){return (document.getElementById(id).value||'').trim();}
+/* Strip invisible/bidi marks iOS autofill adds, unify odd spaces and dashes. */
+function clean(s){return String(s||'').replace(/[\u200B-\u200F\u202A-\u202E\u2060-\u2064\uFEFF]/g,'').replace(/[\u00A0\u2000-\u200A\u202F\u205F\u3000]/g,' ').replace(/[\u2010-\u2015\u2212]/g,'-').trim();}
+function val(id){return clean(document.getElementById(id).value);}
+function normPhone(p){var d=p.replace(/\D/g,'');if(d.length===11&&d.charAt(0)==='1')d=d.slice(1);return d;}
+function errType(m){m=String(m||'').toLowerCase();return /phone/.test(m)?'phone':/email/.test(m)?'email':/complete|contact/.test(m)?'fields':/new guest|already|used/.test(m)?'dup':'other';}
 form.addEventListener('submit',function(ev){
-  ev.preventDefault();if(submit.disabled)return;error.hidden=true;
-  var data={firstName:val('firstName'),lastName:val('lastName'),email:val('email'),phone:val('phone')};
-  if(!data.firstName||!data.lastName)return failure('Please enter your first and last name.');
-  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email))return failure('Please enter a valid email address.');
-  if(data.phone.replace(/\D/g,'').length<10)return failure('Please enter a 10-digit phone number.');
+  ev.preventDefault();if(submit.disabled)return;error.hidden=true;track('submit',true);
+  var data={firstName:val('firstName'),lastName:val('lastName'),email:val('email').replace(/\s+/g,''),phone:normPhone(val('phone'))};
+  if(!data.firstName){track('vfail_first');return failure('Please enter your first name.');}
+  if(!data.lastName){track('vfail_last');return failure('Please enter your last name.');}
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)){track('vfail_email');return failure('Please enter a valid email address.');}
+  if(data.phone.length<10||data.phone.length>15){track('vfail_phone');return failure('Please enter a 10-digit phone number.');}
   submit.disabled=true;submit.textContent='Getting your code…';
   var xhr=new XMLHttpRequest();xhr.open('POST',EXEC_URL,true);xhr.setRequestHeader('Content-Type','text/plain;charset=utf-8');xhr.timeout=30000;
-  xhr.onload=function(){var d;try{d=JSON.parse(xhr.responseText)}catch(e){return failure('Connection problem. Please try again or call (682) 477-5630.')}if(d&&d.error)failure(d.error);else result(d);};
-  xhr.onerror=xhr.ontimeout=function(){failure('Connection problem. Please try again or call (682) 477-5630.');};
+  xhr.onload=function(){var d;try{d=JSON.parse(xhr.responseText)}catch(e){track('err_parse',true);return failure('Connection problem. Please try again or call (682) 477-5630.')}
+    if(d&&d.error){track('err_server_'+errType(d.error),true);failure(d.error);}else result(d);};
+  xhr.onerror=function(){track('err_network',true);failure('Connection problem. Please try again or call (682) 477-5630.');};
+  xhr.ontimeout=function(){track('err_timeout',true);failure('That took too long. Please try again or call (682) 477-5630.');};
   xhr.send(JSON.stringify(data));
 });
 </script></body></html>
