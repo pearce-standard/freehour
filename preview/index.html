@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex"><title>1 Free Hour on TrackMan · The Standard</title>
+<style>
+:root{--green:#4A5D3F;--cream:#F5F0E3;--ink:#2b3326}*{box-sizing:border-box}body{margin:0;background:var(--cream);color:var(--ink);font-family:Arial,Helvetica,sans-serif}
+main{max-width:480px;margin:auto;padding:0 0 32px}.top{padding:12px 16px 0;text-align:center}.logo{width:150px;height:auto}
+.hero{position:relative;margin:8px 16px 0;border-radius:12px;overflow:hidden}.hero video,.hero img{display:block;width:100%;height:170px;object-fit:cover;object-position:50% 40%}
+.hero .tag{position:absolute;left:0;right:0;bottom:0;padding:22px 12px 9px;background:linear-gradient(transparent,rgba(30,40,26,.85));color:#fff;font:bold 19px Georgia,serif;text-align:center}
+.wrap{padding:12px 16px 0}h1{font-family:Georgia,serif;font-weight:normal;color:var(--green);font-size:26px;line-height:1.15;margin:4px 0 4px;text-align:center}
+.loc{font-size:13px;text-align:center;margin:0 0 12px}.card{padding:16px;background:#fffdf7;border:1px solid #d9d2bd;border-radius:12px}
+.row{display:flex;gap:10px}.row>div{flex:1;min-width:0}label{display:block;font-size:12px;font-weight:600;margin:0 0 4px}
+input{width:100%;border:1px solid #b6b9ac;border-radius:7px;background:#fff;padding:12px;font:16px Arial;margin:0 0 10px;color:var(--ink)}
+input:focus,button:focus-visible{outline:3px solid #9cab87;outline-offset:2px}
+.button{display:block;width:100%;border:0;border-radius:9px;padding:16px 12px;margin-top:4px;background:var(--green);color:var(--cream);font:bold 17px Arial;text-decoration:none;text-align:center;cursor:pointer}
+button:disabled{opacity:.65}.fine{font-size:12px;line-height:1.5;margin:10px 0 0;text-align:center;color:#555c50}
+.how{margin-top:14px;font-size:13px;line-height:1.5;background:#e9ecdf;border-radius:10px;padding:12px 14px}
+.code{font-family:monospace;font-size:28px;color:var(--green);overflow-wrap:anywhere;padding:14px 5px;border:1px dashed #a8b09c;margin:12px 0 16px;text-align:center}
+ol{font-size:14px;line-height:1.6;padding-left:20px}.error{color:#8c2929;font-size:14px}h2{font-family:Georgia,serif;font-weight:normal;color:var(--green);margin:0 0 8px}
+.founding{text-align:center;font-family:Georgia,serif;margin-top:18px}a{color:var(--green)}[hidden]{display:none!important}
+</style></head><body><main>
+<div class="top"><img class="logo" src="logo.png" alt="The Standard Indoor Golf Club"></div>
+<div class="hero"><video src="hero.mp4" poster="bay.jpg" autoplay muted loop playsinline preload="auto" aria-label="Guests playing TrackMan at The Standard"><img src="bay.jpg" alt="Two guests playing in a TrackMan bay at The Standard, live shot data on screen"></video><div class="tag">1 Free Hour on TrackMan</div></div>
+<div class="wrap">
+<section id="signup"><h1>Your First Hour Is Free</h1><p class="loc">306 E Northwest Hwy, Grapevine, TX<br>Near Historic Main Street, Grapevine</p>
+<button id="cta" class="button" type="button" style="font-size:20px;padding:20px">Claim My Free Hour</button>
+<p class="fine" id="ctaFine">Free. No membership. Takes 10 seconds.</p>
+<form id="claimForm" class="card" novalidate hidden>
+<label for="fullName">Full name</label><input id="fullName" name="fullName" autocomplete="name" maxlength="120" required>
+<label for="phone">Mobile phone</label><input id="phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" maxlength="40" required>
+<label for="email">Email (we send your code here)</label><input id="email" name="email" type="email" inputmode="email" autocomplete="email" maxlength="254" required>
+<button id="submit" class="button" type="submit">Get My Free Hour</button>
+<p id="error" class="error" role="alert" hidden></p>
+<p class="fine">No membership needed. Takes 10 seconds. New guests only, one per person.</p>
+</form>
+<div class="how"><strong>How it works:</strong> your one-time code shows on screen and is emailed to you. Book online and choose <strong>“Meta Free Hour — 60 Minutes”</strong>. The code only works on that option.</div>
+</section>
+<section id="thanks" class="card" tabindex="-1" hidden aria-live="polite"><h2 id="thanksTitle">Your free hour awaits.</h2><p>We also emailed this code to you.</p><div id="code" class="code"></div>
+<a class="button" href="https://yourgolfbooking.com/venues/the-standard-indoor-golf-club/booking/the-standard-indoor-golf-club" rel="noopener">Book your free hour</a>
+<ol><li>Choose <strong>Meta Free Hour — 60 Minutes</strong>. The code won't work on Non-Member Tee Time or other bookings.</li><li>Enter the code at checkout.</li><li>A $0.50 reservation fee applies.</li></ol></section>
+<section id="notice" class="card" tabindex="-1" hidden aria-live="polite"><h2 id="noticeTitle"></h2><p id="noticeText"></p><p>Need a hand? Call <a href="tel:+16824775630">(682) 477-5630</a>.</p></section>
+<p class="founding">Limited Founding memberships available.</p>
+</div></main>
+<script>
+'use strict';
+var EXEC_URL='https://script.google.com/macros/s/AKfycbyzQbbruP7TIzLUg2BgLcu6B3dG_kGhIv4ghFEiF-ZUWwel-AcWZQAegvR54ftARXhc/exec';
+/* Funnel counters: anonymous event counts only, no personal data. Best-effort; never blocks the form. */
+var UA=navigator.userAgent||'',UAC=/Instagram/i.test(UA)?'ig':(/FBAN|FBAV|FB_IAB|FBIOS|FB4A/i.test(UA)?'fb':'other');
+var NO_TRACK=/[?&]notrack/.test(location.search);
+function track(k,byUa){if(/\/preview\//.test(location.pathname))return;if(NO_TRACK)return;try{var hit=function(key){var u='https://abacus.jasoncameron.dev/hit/sigc-freehour/'+key;
+  if(window.fetch)fetch(u,{mode:'no-cors',keepalive:true,cache:'no-store'}).catch(function(){});else(new Image()).src=u;};
+  hit(k);if(byUa)hit(k+'_'+UAC);}catch(e){}}
+var jsErrs=0;window.onerror=function(m,src,l){try{if(jsErrs++<3){track('jserror',true);var o=(src&&src.indexOf(location.host)>-1)?'own':'ext';track('jserr_'+o+'_'+String(m||'x').toLowerCase().replace(/[^a-z]+/g,'-').slice(0,28),true);}}catch(e){}};
+track('pv_load',true);
+var form=document.getElementById('claimForm'),submit=document.getElementById('submit'),error=document.getElementById('error');
+var LABEL='Get My Free Hour',focused=false;
+document.getElementById('cta').addEventListener('click',function(){track('pv_cta',true);this.hidden=true;document.getElementById('ctaFine').hidden=true;form.hidden=false;try{document.getElementById('fullName').focus()}catch(e){}});
+form.addEventListener('focusin',function(){if(!focused){focused=true;track('focus',true);}});
+function failure(msg){submit.disabled=false;submit.textContent=LABEL;error.textContent=msg||'Something went wrong. Please try again or call (682) 477-5630.';error.hidden=false;}
+function show(id){document.getElementById('signup').hidden=true;var s=document.getElementById(id);s.hidden=false;window.scrollTo(0,0);try{s.focus()}catch(e){}}
+function result(d){
+  if(!d||(!d.code&&!d.notOpen&&!d.soldOut)){track('err_badresponse');return failure();}
+  if(d.code){track(d.existing?'ok_existing':'ok',true);document.getElementById('thanksTitle').textContent=d.existing?'You already have a code:':'Your free hour awaits.';document.getElementById('code').textContent=d.code;show('thanks');}
+  else{track(d.notOpen?'notopen':'soldout');document.getElementById('noticeTitle').textContent=d.notOpen?'Check back soon.':'All available hours have been claimed.';
+    document.getElementById('noticeText').textContent=d.notOpen?"The free hour isn't open yet. Check back soon or call (682) 477-5630.":'Thanks for your interest! Please call us and we will help you with the next available opportunity.';show('notice');}
+}
+/* Strip invisible/bidi marks iOS autofill adds, unify odd spaces and dashes. */
+function clean(s){return String(s||'').replace(/[\u200B-\u200F\u202A-\u202E\u2060-\u2064\uFEFF]/g,'').replace(/[\u00A0\u2000-\u200A\u202F\u205F\u3000]/g,' ').replace(/[\u2010-\u2015\u2212]/g,'-').trim();}
+function val(id){return clean(document.getElementById(id).value);}
+function normPhone(p){var d=p.replace(/\D/g,'');if(d.length===11&&d.charAt(0)==='1')d=d.slice(1);return d;}
+function errType(m){m=String(m||'').toLowerCase();return /phone/.test(m)?'phone':/email/.test(m)?'email':/complete|contact/.test(m)?'fields':/new guest|already|used/.test(m)?'dup':'other';}
+form.addEventListener('submit',function(ev){
+  ev.preventDefault();if(submit.disabled)return;error.hidden=true;track('submit',true);
+  var nm=val('fullName').replace(/\s+/g,' ').split(' '),fn=nm.shift()||'',ln=nm.join(' ');
+  var data={firstName:fn,lastName:ln,email:val('email').replace(/\s+/g,''),phone:normPhone(val('phone'))};
+  if(!data.firstName){track('vfail_first');return failure('Please enter your first name.');}
+  if(!data.lastName){track('vfail_last');return failure('Please enter your first and last name.');}
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)){track('vfail_email');return failure('Please enter a valid email address.');}
+  if(data.phone.length<10||data.phone.length>15){track('vfail_phone');return failure('Please enter a 10-digit phone number.');}
+  submit.disabled=true;submit.textContent='Getting your code…';
+  var xhr=new XMLHttpRequest();xhr.open('POST',EXEC_URL,true);xhr.setRequestHeader('Content-Type','text/plain;charset=utf-8');xhr.timeout=30000;
+  xhr.onload=function(){var d;try{d=JSON.parse(xhr.responseText)}catch(e){track('err_parse',true);return failure('Connection problem. Please try again or call (682) 477-5630.')}
+    if(d&&d.error){track('err_server_'+errType(d.error),true);failure(d.error);}else result(d);};
+  xhr.onerror=function(){track('err_network',true);failure('Connection problem. Please try again or call (682) 477-5630.');};
+  xhr.ontimeout=function(){track('err_timeout',true);failure('That took too long. Please try again or call (682) 477-5630.');};
+  xhr.send(JSON.stringify(data));
+});
+</script></body></html>
