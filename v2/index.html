@@ -47,7 +47,7 @@ var NO_TRACK=/[?&]notrack/.test(location.search);
 function track(k,byUa){if(NO_TRACK)return;try{var hit=function(key){var u='https://abacus.jasoncameron.dev/hit/sigc-freehour/'+key;
   if(window.fetch)fetch(u,{mode:'no-cors',keepalive:true,cache:'no-store'}).catch(function(){});else(new Image()).src=u;};
   hit(k);if(byUa)hit(k+'_'+UAC);}catch(e){}}
-var jsErrs=0;window.onerror=function(){if(jsErrs++<3)track('jserror',true);};
+var jsErrs=0;window.onerror=function(m,src,l){try{if(jsErrs++<3){track('jserror',true);var o=(src&&src.indexOf(location.host)>-1)?'own':'ext';track('jserr_'+o+'_'+String(m||'x').toLowerCase().replace(/[^a-z]+/g,'-').slice(0,28),true);}}catch(e){}};
 track('load',true);
 var form=document.getElementById('claimForm'),submit=document.getElementById('submit'),error=document.getElementById('error');
 var LABEL='Get My Free Hour',focused=false;
