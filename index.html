@@ -20,12 +20,13 @@ ol{font-size:14px;line-height:1.6;padding-left:20px}.error{color:#8c2929;font-si
 <div class="top"><img class="logo" src="logo.png" alt="The Standard Indoor Golf Club"></div>
 <div class="hero"><video src="hero.mp4" poster="bay.jpg" autoplay muted loop playsinline preload="auto" aria-label="Guests playing TrackMan at The Standard"><img src="bay.jpg" alt="Two guests playing in a TrackMan bay at The Standard, live shot data on screen"></video><div class="tag">1 Free Hour on TrackMan</div></div>
 <div class="wrap">
-<section id="signup"><h1>We're Open — 1 Hour Free</h1><p class="loc">306 E Northwest Hwy, Grapevine, TX<br>Near Historic Main Street, Grapevine</p>
-<form id="claimForm" class="card" novalidate>
-<div class="row"><div><label for="firstName">First name</label><input id="firstName" name="firstName" autocomplete="given-name" maxlength="80" required></div>
-<div><label for="lastName">Last name</label><input id="lastName" name="lastName" autocomplete="family-name" maxlength="80" required></div></div>
-<label for="email">Email</label><input id="email" name="email" type="email" inputmode="email" autocomplete="email" maxlength="254" required>
-<label for="phone">Phone</label><input id="phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" maxlength="40" required>
+<section id="signup"><h1>Your First Hour Is Free</h1><p class="loc">306 E Northwest Hwy, Grapevine, TX<br>Near Historic Main Street, Grapevine</p>
+<button id="cta" class="button" type="button" style="font-size:20px;padding:20px">Claim My Free Hour</button>
+<p class="fine" id="ctaFine">Free. No membership. Takes 10 seconds.</p>
+<form id="claimForm" class="card" novalidate hidden>
+<label for="fullName">Full name</label><input id="fullName" name="fullName" autocomplete="name" maxlength="120" required>
+<label for="phone">Mobile phone</label><input id="phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" maxlength="40" required>
+<label for="email">Email (we send your code here)</label><input id="email" name="email" type="email" inputmode="email" autocomplete="email" maxlength="254" required>
 <button id="submit" class="button" type="submit">Get My Free Hour</button>
 <p id="error" class="error" role="alert" hidden></p>
 <p class="fine">No membership needed. Takes 10 seconds. New guests only, one per person.</p>
@@ -51,6 +52,7 @@ var jsErrs=0;window.onerror=function(m,src,l){try{if(jsErrs++<3){track('jserror'
 track('load',true);
 var form=document.getElementById('claimForm'),submit=document.getElementById('submit'),error=document.getElementById('error');
 var LABEL='Get My Free Hour',focused=false;
+document.getElementById('cta').addEventListener('click',function(){track('cta',true);this.hidden=true;document.getElementById('ctaFine').hidden=true;form.hidden=false;try{document.getElementById('fullName').focus()}catch(e){}});
 form.addEventListener('focusin',function(){if(!focused){focused=true;track('focus',true);}});
 function failure(msg){submit.disabled=false;submit.textContent=LABEL;error.textContent=msg||'Something went wrong. Please try again or call (682) 477-5630.';error.hidden=false;}
 function show(id){document.getElementById('signup').hidden=true;var s=document.getElementById(id);s.hidden=false;window.scrollTo(0,0);try{s.focus()}catch(e){}}
@@ -67,9 +69,10 @@ function normPhone(p){var d=p.replace(/\D/g,'');if(d.length===11&&d.charAt(0)===
 function errType(m){m=String(m||'').toLowerCase();return /phone/.test(m)?'phone':/email/.test(m)?'email':/complete|contact/.test(m)?'fields':/new guest|already|used/.test(m)?'dup':'other';}
 form.addEventListener('submit',function(ev){
   ev.preventDefault();if(submit.disabled)return;error.hidden=true;track('submit',true);
-  var data={firstName:val('firstName'),lastName:val('lastName'),email:val('email').replace(/\s+/g,''),phone:normPhone(val('phone'))};
+  var nm=val('fullName').replace(/\s+/g,' ').split(' '),fn=nm.shift()||'',ln=nm.join(' ');
+  var data={firstName:fn,lastName:ln,email:val('email').replace(/\s+/g,''),phone:normPhone(val('phone'))};
   if(!data.firstName){track('vfail_first');return failure('Please enter your first name.');}
-  if(!data.lastName){track('vfail_last');return failure('Please enter your last name.');}
+  if(!data.lastName){track('vfail_last');return failure('Please enter your first and last name.');}
   if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)){track('vfail_email');return failure('Please enter a valid email address.');}
   if(data.phone.length<10||data.phone.length>15){track('vfail_phone');return failure('Please enter a 10-digit phone number.');}
   submit.disabled=true;submit.textContent='Getting your code…';
