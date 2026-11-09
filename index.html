@@ -50,10 +50,10 @@ function track(k,byUa){if(NO_TRACK)return;try{var hit=function(key){var u='https
   if(window.fetch)fetch(u,{mode:'no-cors',keepalive:true,cache:'no-store'}).catch(function(){});else(new Image()).src=u;};
   hit(k);if(byUa)hit(k+'_'+UAC);}catch(e){}}
 var jsErrs=0;window.onerror=function(m,src,l){try{if(jsErrs++<3){track('jserror',true);var o=(src&&src.indexOf(location.host)>-1)?'own':'ext';track('jserr_'+o+'_'+String(m||'x').toLowerCase().replace(/[^a-z]+/g,'-').slice(0,28),true);}}catch(e){}};
-track('pv_load',true);
+track('load',true);
 var form=document.getElementById('claimForm'),submit=document.getElementById('submit'),error=document.getElementById('error');
 var LABEL='Get My Free Hour',focused=false;
-document.getElementById('cta').addEventListener('click',function(){track('pv_cta',true);this.hidden=true;document.getElementById('ctaFine').hidden=true;form.hidden=false;try{document.getElementById('fullName').focus()}catch(e){}});
+document.getElementById('cta').addEventListener('click',function(){track('cta',true);this.hidden=true;document.getElementById('ctaFine').hidden=true;form.hidden=false;try{document.getElementById('fullName').focus()}catch(e){}});
 form.addEventListener('focusin',function(){if(!focused){focused=true;track('focus',true);}});
 function failure(msg){submit.disabled=false;submit.textContent=LABEL;error.textContent=msg||'Something went wrong. Please try again or call (682) 477-5630.';error.hidden=false;}
 function show(id){document.getElementById('signup').hidden=true;var s=document.getElementById(id);s.hidden=false;window.scrollTo(0,0);try{s.focus()}catch(e){}}
