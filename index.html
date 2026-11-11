@@ -1,38 +1,43 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex"><title>1 Free Hour on TrackMan · The Standard</title>
 <style>
-:root{--green:#4A5D3F;--cream:#F5F0E3;--ink:#2b3326}*{box-sizing:border-box}body{margin:0;background:var(--cream);color:var(--ink);font-family:Arial,Helvetica,sans-serif}
-main{max-width:480px;margin:auto;padding:0 0 32px}.top{padding:12px 16px 0;text-align:center}.logo{width:150px;height:auto}
-.hero{position:relative;margin:8px 16px 0;border-radius:12px;overflow:hidden}.hero video,.hero img{display:block;width:100%;height:260px;object-fit:cover;object-position:50% 45%}
-.hero .tag{position:absolute;left:0;right:0;bottom:0;padding:22px 12px 9px;background:linear-gradient(transparent,rgba(30,40,26,.85));color:#fff;font:bold 19px Georgia,serif;text-align:center}
-.wrap{padding:12px 16px 0}h1{font-family:Georgia,serif;font-weight:normal;color:var(--green);font-size:26px;line-height:1.15;margin:4px 0 4px;text-align:center}
-.loc{font-size:13px;text-align:center;margin:0 0 12px}.card{padding:16px;background:#fffdf7;border:1px solid #d9d2bd;border-radius:12px}
-.row{display:flex;gap:10px}.row>div{flex:1;min-width:0}label{display:block;font-size:12px;font-weight:600;margin:0 0 4px}
-input{width:100%;border:1px solid #b6b9ac;border-radius:7px;background:#fff;padding:12px;font:16px Arial;margin:0 0 10px;color:var(--ink)}
+:root{--green:#7A8775;--green-hover:#6C7967;--cream:#F5F0E3;--ink:#222}*{box-sizing:border-box}body{margin:0;background:var(--cream);color:var(--ink);font-family:Arial,Helvetica,sans-serif}
+main{max-width:480px;margin:auto;padding:0 0 32px}
+.top{padding:4px 16px 0;text-align:center}.logo{width:96px;height:auto}
+.hero{position:relative;margin:4px 16px 0;border-radius:10px;overflow:hidden}
+.hero img{display:block;width:100%;height:160px;object-fit:cover;object-position:50% 45%}
+.hero .tag{position:absolute;left:0;right:0;bottom:0;padding:18px 12px 8px;background:linear-gradient(transparent,rgba(30,40,26,.85));color:#fff;font:bold 18px Georgia,serif;text-align:center}
+.wrap{padding:4px 16px 0}
+h1{font-family:Georgia,serif;font-weight:normal;color:var(--green);font-size:20px;line-height:1.15;margin:0 0 1px;text-align:center}
+.loc{font-size:12px;line-height:1.3;text-align:center;margin:0 0 6px}
+.card{padding:8px 12px 10px;background:#fffdf7;border:1px solid #d9d2bd;border-radius:10px}
+label{display:block;font-size:11px;font-weight:600;margin:0 0 2px}
+input{width:100%;border:1px solid #b6b9ac;border-radius:7px;background:#fff;padding:8px 12px;font:16px Arial;margin:0 0 5px;color:var(--ink)}
 input:focus,button:focus-visible{outline:3px solid #9cab87;outline-offset:2px}
-.button{display:block;width:100%;border:0;border-radius:9px;padding:16px 12px;margin-top:4px;background:var(--green);color:var(--cream);font:bold 17px Arial;text-decoration:none;text-align:center;cursor:pointer}
-button:disabled{opacity:.65}.fine{font-size:12px;line-height:1.5;margin:10px 0 0;text-align:center;color:#555c50}
-.how{margin-top:14px;font-size:13px;line-height:1.5;background:#e9ecdf;border-radius:10px;padding:12px 14px}
+.button{display:block;width:100%;border:0;border-radius:9px;padding:12px;margin-top:1px;background:var(--green);color:#fff;font:bold 17px Arial;text-decoration:none;text-align:center;cursor:pointer}
+.button:hover,button.button:hover{background:var(--green-hover)}
+button:disabled{opacity:.65}
+.fine{font-size:12px;line-height:1.45;margin:8px 0 0;text-align:center;color:#555c50}
+.how{margin-top:12px;font-size:13px;line-height:1.5;background:#e9ecdf;border-radius:10px;padding:12px 14px}
+.ptm{display:flex;align-items:center;justify-content:center;gap:7px;margin:12px 0 0;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#555c50}.ptm img{height:12px;width:auto}
 .code{font-family:monospace;font-size:28px;color:var(--green);overflow-wrap:anywhere;padding:14px 5px;border:1px dashed #a8b09c;margin:12px 0 16px;text-align:center}
-ol{font-size:14px;line-height:1.6;padding-left:20px}.error{color:#8c2929;font-size:14px}h2{font-family:Georgia,serif;font-weight:normal;color:var(--green);margin:0 0 8px}
+ol{font-size:14px;line-height:1.6;padding-left:20px}.error{color:#8c2929;font-size:14px;margin:8px 0 0}h2{font-family:Georgia,serif;font-weight:normal;color:var(--green);margin:0 0 8px}
 .founding{text-align:center;font-family:Georgia,serif;margin-top:18px}a{color:var(--green)}[hidden]{display:none!important}
-.steps{font-size:14px;line-height:1.55;margin:12px 0 0;padding:12px 14px 12px 32px;background:#e9ecdf;border-radius:10px}.ptm{display:flex;align-items:center;justify-content:center;gap:7px;margin:8px 0 0;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#555c50}.ptm img{height:12px;width:auto}</style></head><body><main>
+</style></head><body><main>
 <div class="top"><img class="logo" src="logo.png" alt="The Standard Indoor Golf Club"></div>
 <div class="hero"><img src="club.jpg" alt="Guests playing TrackMan in a bay at The Standard, lounge chairs in front"><div class="tag">1 Free Hour on TrackMan</div></div>
-<div class="ptm">Powered by <img src="trackman.svg" alt="TrackMan"></div>
 <div class="wrap">
 <section id="signup"><h1>Your First Hour Is Free</h1><p class="loc">An indoor golf club right off Main Street in Grapevine<br>306 E Northwest Hwy</p>
-<button id="cta" class="button" type="button" style="font-size:20px;padding:20px">Claim My Free Hour</button>
-<p class="fine" id="ctaFine">Free. No membership. No card. Takes 10 seconds.</p><ol class="steps"><li>Tap Claim and enter your name, phone and email.</li><li>We email you a code right away.</li><li>Book any open hour online and show up. That's it.</li></ol>
-<form id="claimForm" class="card" novalidate hidden>
+<form id="claimForm" class="card" novalidate>
 <label for="fullName">Full name</label><input id="fullName" name="fullName" autocomplete="name" maxlength="120" required>
 <label for="phone">Mobile phone</label><input id="phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" maxlength="40" required>
 <label for="email">Email (we send your code here)</label><input id="email" name="email" type="email" inputmode="email" autocomplete="email" maxlength="254" required>
 <button id="submit" class="button" type="submit">Get My Free Hour</button>
 <p id="error" class="error" role="alert" hidden></p>
-<p class="fine">No membership needed. Takes 10 seconds. New guests only, one per person.</p>
 </form>
+<p class="fine">Free. No membership. No card. Takes 10 seconds. New guests only, one per person.</p>
 <div class="how"><strong>How it works:</strong> your one-time code shows on screen and is emailed to you. Book online and choose <strong>“Meta Free Hour — 60 Minutes”</strong>. The code only works on that option.</div>
+<div class="ptm">Powered by <img src="trackman.svg" alt="TrackMan"></div>
 </section>
 <section id="thanks" class="card" tabindex="-1" hidden aria-live="polite"><h2 id="thanksTitle">Your free hour awaits.</h2><p>We also emailed this code to you.</p><div id="code" class="code"></div>
 <a class="button" href="https://yourgolfbooking.com/venues/the-standard-indoor-golf-club/booking/the-standard-indoor-golf-club" rel="noopener">Book your free hour</a>
@@ -53,13 +58,12 @@ var jsErrs=0;window.onerror=function(m,src,l){try{if(jsErrs++<3){track('jserror'
 track('load',true);
 var form=document.getElementById('claimForm'),submit=document.getElementById('submit'),error=document.getElementById('error');
 var LABEL='Get My Free Hour',focused=false;
-document.getElementById('cta').addEventListener('click',function(){track('cta',true);this.hidden=true;document.getElementById('ctaFine').hidden=true;form.hidden=false;try{document.getElementById('fullName').focus()}catch(e){}});
 form.addEventListener('focusin',function(){if(!focused){focused=true;track('focus',true);}});
 function failure(msg){submit.disabled=false;submit.textContent=LABEL;error.textContent=msg||'Something went wrong. Please try again or call (682) 477-5630.';error.hidden=false;}
 function show(id){document.getElementById('signup').hidden=true;var s=document.getElementById(id);s.hidden=false;window.scrollTo(0,0);try{s.focus()}catch(e){}}
 function result(d){
   if(!d||(!d.code&&!d.notOpen&&!d.soldOut)){track('err_badresponse');return failure();}
-  if(d.code){track(d.existing?'ok_existing':'ok',true);document.getElementById('thanksTitle').textContent=d.existing?'You already have a code:':'Your free hour awaits.';document.getElementById('code').textContent=d.code;show('thanks');}
+  if(d.code){track(d.existing?'ok_existing':'claimed',true);document.getElementById('thanksTitle').textContent=d.existing?'You already have a code:':'Your free hour awaits.';document.getElementById('code').textContent=d.code;show('thanks');}
   else{track(d.notOpen?'notopen':'soldout');document.getElementById('noticeTitle').textContent=d.notOpen?'Check back soon.':'All available hours have been claimed.';
     document.getElementById('noticeText').textContent=d.notOpen?"The free hour isn't open yet. Check back soon or call (682) 477-5630.":'Thanks for your interest! Please call us and we will help you with the next available opportunity.';show('notice');}
 }
